@@ -239,7 +239,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• 点击"收到" → 当天不再提醒\n• 点击"延迟" → 1小时后再次提醒\n• 5分钟无操作 → 自动再次提醒\n• 开机自动启动，无需手动开启"
+            android:text="• 点击[收到] → 当天不再提醒\n• 点击[延迟] → 1小时后再次提醒\n• 5分钟无操作 → 自动再次提醒\n• 开机自动启动，无需手动开启"
             android:textColor="@color/dark"
             android:textSize="12sp"
             android:lineSpacingExtra="4dp"
