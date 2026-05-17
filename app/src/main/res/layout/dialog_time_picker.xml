@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/card_bg">
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改提醒时间"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="16dp">
+
+        <!-- 小时 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnHourUp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:text="▲"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tvHour"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:text="08"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+            <Button
+                android:id="@+id/btnHourDown"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:text="▼"
+                android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小时"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="16dp" />
+
+        <!-- 分钟 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnMinUp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:text="▲"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tvMin"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:text="40"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+            <Button
+                android:id="@+id/btnMinDown"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:text="▼"
+                android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分钟"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Android APK (Native Kotlin)
 
 on:
   push:
@@ -13,71 +13,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y \
-            git zip unzip curl \
-            autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 \
-            libffi-dev libssl-dev \
-            libsqlite3-dev sqlite3 \
-            build-essential ccache
-
-      - name: Install buildozer & cython
-        run: |
-          pip install --upgrade pip
-          pip install buildozer cython
-
-      - name: Cache buildozer global dir
+      - name: Cache Gradle
         uses: actions/cache@v4
         with:
-          path: ~/.buildozer
-          key: ${{ runner.os }}-buildozer-${{ hashFiles('buildozer.spec') }}
-          restore-keys: |
-            ${{ runner.os }}-buildozer-
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-
 
-      - name: Cache .gradle
-        uses: actions/cache@v4
-        with:
-          path: ~/.gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-      - name: Accept Android SDK licenses & build APK
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
-        run: |
-          export JAVA_HOME=$JAVA_HOME_17_X64
-          export PATH=$JAVA_HOME/bin:$PATH
-          java -version
-          mkdir -p $HOME/.android
-          touch $HOME/.android/repositories.cfg
-          yes | buildozer android debug 2>&1 | tee build.log
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: 打卡提醒-v1.3-apk
-          path: bin/*.apk
+          name: 打卡提醒-v2.0-native-apk
+          path: app/build/outputs/apk/debug/*.apk
           retention-days: 14
           if-no-files-found: error
-
-      - name: Upload build log (on failure)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-log
-          path: build.log

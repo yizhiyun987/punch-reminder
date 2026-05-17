@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">打卡提醒</string>
+    <string name="channel_name">打卡提醒通知</string>
+    <string name="channel_desc">上下班打卡时间到达时发送提醒</string>
+    <string name="notif_title_checkin">上班打卡提醒 🏢</string>
+    <string name="notif_title_checkout">下班打卡提醒 🏠</string>
+</resources>
