@@ -1,249 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_dark">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- 动态/静态背景层 -->
+    <ImageView
+        android:id="@+id/ivBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 
-        <!-- 标题 -->
-        <TextView
+    <!-- 遮罩层（背景图时加深） -->
+    <View
+        android:id="@+id/viewOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollRoot"
+        android:background="@color/bg_dark">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🕐 打卡提醒助手"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingBottom="12dp" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <!-- 当日状态卡片 -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-            <LinearLayout
+            <!-- 标题 -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="📋 当日打卡状态"
-                    android:textColor="@color/gray"
-                    android:textSize="13sp"
-                    android:paddingBottom="8dp" />
-                <TextView
-                    android:id="@+id/tvCheckinStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="上班打卡：⏳ 等待提醒 (08:40)"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"
-                    android:paddingBottom="4dp" />
-                <TextView
-                    android:id="@+id/tvCheckoutStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="下班打卡：⏳ 等待提醒 (18:00)"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                android:text="🕐 打卡提醒助手"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:paddingBottom="12dp" />
 
-        <!-- 上班提醒设置 -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-            <LinearLayout
+            <!-- 当日状态 -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="🏢 上班打卡提醒"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="10dp" />
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
                     <TextView
-                        android:id="@+id/tvCheckinTime"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="时间：08:40"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                    <Button
-                        android:id="@+id/btnEditCheckinTime"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="修改时间"
-                        android:textColor="@color/teal_200" />
-                </LinearLayout>
-                <Button
-                    android:id="@+id/btnEditCheckinMsg"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✏️ 修改提示词"
-                    android:textColor="@color/purple_200"
-                    android:layout_marginTop="4dp" />
-                <Button
-                    android:id="@+id/btnTestCheckin"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="▶ 立即测试上班提醒"
-                    android:textColor="@color/green"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 下班提醒设置 -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="🏠 下班打卡提醒"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="10dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-                    <TextView
-                        android:id="@+id/tvCheckoutTime"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="时间：18:00"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                    <Button
-                        android:id="@+id/btnEditCheckoutTime"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="修改时间"
-                        android:textColor="@color/teal_200" />
-                </LinearLayout>
-                <Button
-                    android:id="@+id/btnEditCheckoutMsg"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="✏️ 修改提示词"
-                    android:textColor="@color/purple_200"
-                    android:layout_marginTop="4dp" />
-                <Button
-                    android:id="@+id/btnTestCheckout"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="▶ 立即测试下班提醒"
-                    android:textColor="@color/green"
-                    android:layout_marginTop="8dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 自定义提醒 -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="📋 自定义提醒"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                    <Button
-                        android:id="@+id/btnAddCustom"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="＋ 添加"
-                        android:backgroundTint="@color/teal_700" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/customReminderList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvNoCustom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="暂无自定义提醒"
-                        android:textColor="@color/dark"
+                        android:text="📋 当日打卡状态"
+                        android:textColor="@color/gray"
                         android:textSize="13sp"
-                        android:gravity="center"
-                        android:padding="8dp" />
+                        android:paddingBottom="8dp" />
+                    <TextView
+                        android:id="@+id/tvCheckinStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="上班打卡：⏳ 等待提醒 (08:40)"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp"
+                        android:paddingBottom="4dp" />
+                    <TextView
+                        android:id="@+id/tvCheckoutStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="下班打卡：⏳ 等待提醒 (18:00)"
+                        android:textColor="@color/gray"
+                        android:textSize="15sp" />
                 </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-        <!-- 说明 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="• 点击[收到] → 当天不再提醒\n• 点击[延迟] → 1小时后再次提醒\n• 5分钟无操作 → 自动再次提醒\n• 开机自动启动，无需手动开启"
-            android:textColor="@color/dark"
-            android:textSize="12sp"
-            android:lineSpacingExtra="4dp"
-            android:padding="8dp" />
+            <!-- 上班提醒 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🏢 上班打卡提醒"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="10dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/tvCheckinTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="时间：08:40"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/btnEditCheckinTime"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="修改时间"
+                            android:textColor="@color/teal_200" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/btnEditCheckinMsg"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✏️ 修改提示词"
+                        android:textColor="@color/purple_200"
+                        android:layout_marginTop="4dp" />
+                    <Button
+                        android:id="@+id/btnTestCheckin"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="▶ 立即测试上班提醒"
+                        android:textColor="@color/green"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
-</ScrollView>
+            <!-- 下班提醒 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🏠 下班打卡提醒"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="10dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/tvCheckoutTime"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="时间：18:00"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/btnEditCheckoutTime"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="修改时间"
+                            android:textColor="@color/teal_200" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/btnEditCheckoutMsg"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✏️ 修改提示词"
+                        android:textColor="@color/purple_200"
+                        android:layout_marginTop="4dp" />
+                    <Button
+                        android:id="@+id/btnTestCheckout"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="▶ 立即测试下班提醒"
+                        android:textColor="@color/green"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 自定义提醒 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="📋 自定义提醒"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/btnAddCustom"
+                            style="@style/Widget.MaterialComponents.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:text="＋ 添加"
+                            android:backgroundTint="@color/teal_700" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/customReminderList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 外观设置 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🎨 外观设置"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="12dp" />
+
+                    <!-- 背景类型选择 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="背景类型"
+                        android:textColor="@color/gray"
+                        android:textSize="13sp"
+                        android:paddingBottom="6dp" />
+                    <RadioGroup
+                        android:id="@+id/rgBgType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+                        <RadioButton
+                            android:id="@+id/rbBgNone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="默认深色"
+                            android:textColor="@color/white"
+                            android:checked="true" />
+                        <RadioButton
+                            android:id="@+id/rbBgStatic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="静态图片"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="16dp" />
+                        <RadioButton
+                            android:id="@+id/rbBgGif"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="动态GIF"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="16dp" />
+                    </RadioGroup>
+
+                    <!-- 选图按钮 + 预览 -->
+                    <LinearLayout
+                        android:id="@+id/layoutBgPicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:visibility="gone">
+                        <Button
+                            android:id="@+id/btnPickBg"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📁 选择图片"
+                            android:textColor="@color/teal_200" />
+                        <Button
+                            android:id="@+id/btnClearBg"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✕ 清除"
+                            android:textColor="@color/orange"
+                            android:layout_marginStart="8dp" />
+                        <ImageView
+                            android:id="@+id/ivBgPreview"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:scaleType="centerCrop"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/card_bg"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dark"
+                        android:layout_marginVertical="12dp" />
+
+                    <!-- 提醒音乐 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🎵 提醒音乐"
+                        android:textColor="@color/gray"
+                        android:textSize="13sp"
+                        android:paddingBottom="6dp" />
+                    <TextView
+                        android:id="@+id/tvRingtoneLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="当前：系统默认闹钟铃声"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:paddingBottom="8dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/btnPickRingtone"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🎵 选择铃声"
+                            android:textColor="@color/teal_200" />
+                        <Button
+                            android:id="@+id/btnPickMusicFile"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📁 本地音乐"
+                            android:textColor="@color/purple_200"
+                            android:layout_marginStart="8dp" />
+                        <Button
+                            android:id="@+id/btnResetRingtone"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="重置"
+                            android:textColor="@color/orange"
+                            android:layout_marginStart="8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 说明 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• 点击[收到] → 当天不再提醒\n• 点击[延迟] → 1小时后再次提醒\n• 5分钟无操作 → 自动再次提醒\n• 开机自动启动，无需手动开启"
+                android:textColor="@color/dark"
+                android:textSize="12sp"
+                android:lineSpacingExtra="4dp"
+                android:padding="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

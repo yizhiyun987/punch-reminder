@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提醒名称"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/etReminderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="例如：午休提醒"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#666666"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提醒类型"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp"
+            android:paddingBottom="4dp" />
+        <RadioGroup
+            android:id="@+id/rgType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            <RadioButton
+                android:id="@+id/rbPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单次时间点"
+                android:textColor="#FFFFFF"
+                android:checked="true" />
+            <RadioButton
+                android:id="@+id/rbRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间段循环"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="20dp" />
+        </RadioGroup>
+
+        <!-- 时间点 Panel -->
+        <LinearLayout
+            android:id="@+id/panelPoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提醒时间"
+                android:textColor="#AAAAAA"
+                android:textSize="13sp"
+                android:paddingBottom="4dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <Button android:id="@+id/btnPHDown"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvPH"
+                    android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="09" android:textColor="#FFFFFF"
+                    android:textSize="28sp" android:textStyle="bold" android:gravity="center" />
+                <Button android:id="@+id/btnPHUp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text=" : " android:textColor="#FFFFFF" android:textSize="24sp" android:textStyle="bold" />
+                <Button android:id="@+id/btnPMDown"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvPM"
+                    android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="00" android:textColor="#FFFFFF"
+                    android:textSize="28sp" android:textStyle="bold" android:gravity="center" />
+                <Button android:id="@+id/btnPMUp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 时间段 Panel -->
+        <LinearLayout
+            android:id="@+id/panelRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp">
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="开始时间" android:textColor="#AAAAAA" android:textSize="13sp" android:paddingBottom="4dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                <Button android:id="@+id/btnRSHDown" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvRSH" android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="09" android:textColor="#FFFFFF" android:textSize="24sp" android:gravity="center" />
+                <Button android:id="@+id/btnRSHUp" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text=" : " android:textColor="#FFFFFF" android:textSize="20sp" />
+                <Button android:id="@+id/btnRSMDown" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvRSM" android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="00" android:textColor="#FFFFFF" android:textSize="24sp" android:gravity="center" />
+                <Button android:id="@+id/btnRSMUp" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="结束时间" android:textColor="#AAAAAA" android:textSize="13sp" android:paddingBottom="4dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
+                <Button android:id="@+id/btnREHDown" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvREH" android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="18" android:textColor="#FFFFFF" android:textSize="24sp" android:gravity="center" />
+                <Button android:id="@+id/btnREHUp" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text=" : " android:textColor="#FFFFFF" android:textSize="20sp" />
+                <Button android:id="@+id/btnREMDown" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▼" android:textColor="#AAAAAA" android:padding="0dp" />
+                <TextView android:id="@+id/tvREM" android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:text="00" android:textColor="#FFFFFF" android:textSize="24sp" android:gravity="center" />
+                <Button android:id="@+id/btnREMUp" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="▲" android:textColor="#AAAAAA" android:padding="0dp" />
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="间隔时间（分钟）" android:textColor="#AAAAAA" android:textSize="13sp" android:paddingBottom="4dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <Button android:id="@+id/btnIVDown" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="−" android:textColor="#AAAAAA" android:textSize="18sp" android:padding="0dp" />
+                <TextView android:id="@+id/tvIV" android:layout_width="56dp" android:layout_height="wrap_content"
+                    android:text="30" android:textColor="#FFFFFF" android:textSize="24sp" android:gravity="center" />
+                <Button android:id="@+id/btnIVUp" style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="40dp" android:layout_height="40dp" android:text="+" android:textColor="#AAAAAA" android:textSize="18sp" android:padding="0dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 弹窗标题 -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="弹窗标题" android:textColor="#AAAAAA" android:textSize="13sp"
+            android:paddingBottom="4dp" android:layout_marginTop="8dp" />
+        <EditText android:id="@+id/etTitle"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="自定义提醒" android:inputType="text"
+            android:textColor="#FFFFFF" android:textColorHint="#666666"
+            android:layout_marginBottom="8dp" />
+
+        <!-- 提醒正文 -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="提醒正文" android:textColor="#AAAAAA" android:textSize="13sp" android:paddingBottom="4dp" />
+        <EditText android:id="@+id/etMsg"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="提醒时间到了！" android:inputType="textMultiLine"
+            android:minLines="2" android:textColor="#FFFFFF" android:textColorHint="#666666" />
+
+    </LinearLayout>
+</ScrollView>

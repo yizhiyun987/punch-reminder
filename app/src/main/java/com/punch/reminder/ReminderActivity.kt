@@ -42,6 +42,7 @@ class ReminderActivity : AppCompatActivity() {
             )
         }
 
+        Prefs.init(this)
         binding = ActivityReminderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -103,7 +104,13 @@ class ReminderActivity : AppCompatActivity() {
 
     private fun playDefaultAlarm() {
         try {
-            val uri = android.provider.Settings.System.DEFAULT_ALARM_ALERT_URI
+            // 优先使用用户设置的铃声，否则用系统默认闹钟
+            val uriStr = Prefs.ringtoneUri
+            val uri = if (uriStr.isNotEmpty()) {
+                android.net.Uri.parse(uriStr)
+            } else {
+                android.provider.Settings.System.DEFAULT_ALARM_ALERT_URI
+            }
             mediaPlayer = MediaPlayer().apply {
                 setAudioAttributes(
                     AudioAttributes.Builder()
@@ -116,7 +123,19 @@ class ReminderActivity : AppCompatActivity() {
                 prepare()
                 start()
             }
-        } catch (e: Exception) { /* 无法播放时静音 */ }
+        } catch (e: Exception) {
+            // 用户设置的 URI 失效，降级到系统默认
+            try {
+                val fallback = android.provider.Settings.System.DEFAULT_ALARM_ALERT_URI
+                mediaPlayer = MediaPlayer().apply {
+                    setAudioAttributes(AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build())
+                    setDataSource(this@ReminderActivity, fallback)
+                    isLooping = false; prepare(); start()
+                }
+            } catch (e2: Exception) { /* 静音 */ }
+        }
     }
 
     private fun stopMediaAndVibrate() {
