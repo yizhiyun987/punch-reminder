@@ -389,7 +389,7 @@ class MainActivity : AppCompatActivity() {
             if (!am.canScheduleExactAlarms()) {
                 AlertDialog.Builder(this)
                     .setTitle("需要精确闹钟权限")
-                    .setMessage("为确保按时提醒，请在下一页授予"闹钟和提醒"权限")
+                    .setMessage("为确保按时提醒，请在下一页授予「闹钟和提醒」权限")
                     .setPositiveButton("前往设置") { _, _ ->
                         startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
                             Uri.parse("package:$packageName")))
