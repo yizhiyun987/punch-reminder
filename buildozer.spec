@@ -7,7 +7,7 @@ package.domain = com.reminder.punch
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,kv,atlas,mp3,wav,ogg,m4a,bmp,webp
 
-version = 1.2.0
+version = 1.3.0
 
 requirements = python3,kivy
 
@@ -17,7 +17,7 @@ orientation = portrait
 android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,VIBRATE,WAKE_LOCK,RECEIVE_BOOT_COMPLETED,READ_MEDIA_AUDIO,READ_MEDIA_IMAGES,READ_MEDIA_VIDEO
 
 android.minapi = 21
-android.api = 33
+android.api = 35
 android.ndk = 25b
 
 android.wakelock = True
